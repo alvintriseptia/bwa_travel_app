@@ -1,37 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:travel_airplane_app/shared/theme.dart';
+import 'package:travel_airplane_app/ui/pages/home_page.dart';
+import 'package:travel_airplane_app/ui/widgets/custom_bottom_navigation_item.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Widget CustomButtonNavigation() {
-      Widget Icon(String iconURL, bool active) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(),
-            Container(
-              width: 24,
-              height: 24,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/${iconURL}'),
-                ),
-              ),
-            ),
-            Container(
-              width: 30,
-              height: 2,
-              decoration: BoxDecoration(
-                  color: active ? kPrimaryColor : kTransparentColor,
-                  borderRadius: BorderRadius.circular(18)),
-            ),
-          ],
-        );
-      }
+    Widget buildContent() {
+      return HomePage();
+    }
 
+    Widget CustomButtonNavigation() {
       return Align(
           alignment: Alignment.bottomCenter,
           child: Container(
@@ -46,15 +27,16 @@ class MainPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Icon('icon_home.png', true),
-                  Icon('icon_booking.png', false),
-                  Icon('icon_card.png', false),
-                  Icon('icon_settings.png', false),
+                  CustomButtomNavigationItem(
+                      iconURL: 'icon_home.png', active: true),
+                  CustomButtomNavigationItem(iconURL: 'icon_booking.png'),
+                  CustomButtomNavigationItem(iconURL: 'icon_card.png'),
+                  CustomButtomNavigationItem(iconURL: 'icon_settings.png'),
                 ],
               )));
     }
 
     return Scaffold(
-        body: Stack(children: [Text('MainPage'), CustomButtonNavigation()]));
+        body: Stack(children: [buildContent(), CustomButtonNavigation()]));
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_airplane_app/shared/theme.dart';
+import 'package:travel_airplane_app/ui/widgets/custom_button.dart';
+import 'package:travel_airplane_app/ui/widgets/custom_text_form_field.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -16,52 +18,12 @@ class SignUpPage extends StatelessWidget {
       );
     }
 
-    Widget InputSection(
-        {required String label,
-        required String hint,
-        bool obscureText = false}) {
-      return Container(
-          margin: EdgeInsets.only(bottom: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(label, style: blackTextStyle),
-              SizedBox(
-                height: 6,
-              ),
-              TextFormField(
-                cursorColor: kBlackColor,
-                obscureText: obscureText,
-                decoration: InputDecoration(
-                    hintText: hint,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(defaultRadius)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: kPrimaryColor),
-                        borderRadius: BorderRadius.circular(defaultRadius))),
-              )
-            ],
-          ));
-    }
-
     Widget SubmitButton() {
-      return Container(
-        margin: EdgeInsets.only(top: 30),
-        width: double.infinity,
-        height: 55,
-        child: TextButton(
+      return CustomButton(
+          title: "Get Started",
           onPressed: () {
-            Navigator.of(context).pushNamed('/bonus');
-          },
-          style: TextButton.styleFrom(
-            backgroundColor: kPrimaryColor,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(defaultRadius)),
-          ),
-          child: Text("Get Started",
-              style: whiteTextStyle.copyWith(fontSize: 18, fontWeight: medium)),
-        ),
-      );
+            Navigator.pushNamed(context, '/bonus');
+          });
     }
 
     Widget TermsAndCondition() {
@@ -86,11 +48,12 @@ class SignUpPage extends StatelessWidget {
             children: [
               Title(),
               SizedBox(height: 60),
-              InputSection(label: "Full Name", hint: "Your full name"),
-              InputSection(label: "Email Address", hint: "Your email address"),
-              InputSection(
+              CustomTextFormField(label: "Full Name", hint: "Your full name"),
+              CustomTextFormField(
+                  label: "Email Address", hint: "Your email address"),
+              CustomTextFormField(
                   label: "Password", hint: "Your password", obscureText: true),
-              InputSection(label: "Hobby", hint: "Your hobby"),
+              CustomTextFormField(label: "Hobby", hint: "Your hobby"),
               SubmitButton(),
               TermsAndCondition(),
             ],
