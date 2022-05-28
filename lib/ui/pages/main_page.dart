@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_airplane_app/cubit/page_cubit.dart';
 import 'package:travel_airplane_app/shared/theme.dart';
 import 'package:travel_airplane_app/ui/pages/home_page.dart';
+import 'package:travel_airplane_app/ui/pages/settings_page.dart';
+import 'package:travel_airplane_app/ui/pages/transaction_page.dart';
+import 'package:travel_airplane_app/ui/pages/wallet_page.dart';
 import 'package:travel_airplane_app/ui/widgets/custom_bottom_navigation_item.dart';
 
 class MainPage extends StatelessWidget {
@@ -8,8 +13,19 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget buildContent() {
-      return HomePage();
+    Widget buildContent(int currentIndex) {
+      switch (currentIndex) {
+        case 0:
+          return HomePage();
+        case 1:
+          return TransactionPage();
+        case 2:
+          return WalletPage();
+        case 3:
+          return SettingsPage();
+        default:
+          return HomePage();
+      }
     }
 
     Widget CustomButtonNavigation() {
@@ -28,15 +44,25 @@ class MainPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CustomButtomNavigationItem(
-                      iconURL: 'icon_home.png', active: true),
-                  CustomButtomNavigationItem(iconURL: 'icon_booking.png'),
-                  CustomButtomNavigationItem(iconURL: 'icon_card.png'),
-                  CustomButtomNavigationItem(iconURL: 'icon_settings.png'),
+                      index: 0, iconURL: 'icon_home.png'),
+                  CustomButtomNavigationItem(
+                      index: 1, iconURL: 'icon_booking.png'),
+                  CustomButtomNavigationItem(
+                      index: 2, iconURL: 'icon_card.png'),
+                  CustomButtomNavigationItem(
+                      index: 3, iconURL: 'icon_settings.png'),
                 ],
               )));
     }
 
-    return Scaffold(
-        body: Stack(children: [buildContent(), CustomButtonNavigation()]));
+    return BlocBuilder<PageCubit, int>(
+      builder: (context, currentIndex) {
+        return Scaffold(
+            body: Stack(children: [
+          buildContent(currentIndex),
+          CustomButtonNavigation()
+        ]));
+      },
+    );
   }
 }

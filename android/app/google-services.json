@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "597105322068",
+    "project_id": "travel-app-4fc38",
+    "storage_bucket": "travel-app-4fc38.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597105322068:android:821aa683a5a6f5b4e665c1",
+        "android_client_info": {
+          "package_name": "com.alvindev.travel_airplane_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597105322068-j6hleat61t7t15ar5ojouh0tsve141u9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALTSI2d-C1Jn5XGpLjdw_GkI2ur9ySCwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597105322068-j6hleat61t7t15ar5ojouh0tsve141u9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

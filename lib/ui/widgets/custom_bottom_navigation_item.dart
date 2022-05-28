@@ -1,37 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:travel_airplane_app/cubit/page_cubit.dart';
 import 'package:travel_airplane_app/shared/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomButtomNavigationItem extends StatelessWidget {
+  final int index;
   final String iconURL;
-  final bool active;
 
   const CustomButtomNavigationItem(
-      {Key? key, required this.iconURL, this.active = false})
+      {Key? key, required this.index, required this.iconURL})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SizedBox(),
-        Container(
-          width: 24,
-          height: 24,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/${iconURL}'),
-            ),
+    return GestureDetector(
+      onTap: () {
+        context.read<PageCubit>().setPage(index);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(),
+          Image.asset(
+            iconURL,
+            width: 24,
+            height: 24,
+            color: context.read<PageCubit>().state == index
+                ? kPrimaryColor
+                : kGreyColor,
           ),
-        ),
-        Container(
-          width: 30,
-          height: 2,
-          decoration: BoxDecoration(
-              color: active ? kPrimaryColor : kTransparentColor,
-              borderRadius: BorderRadius.circular(18)),
-        ),
-      ],
+          Container(
+            width: 30,
+            height: 2,
+            decoration: BoxDecoration(
+                color: context.read<PageCubit>().state == index
+                    ? kPrimaryColor
+                    : kTransparentColor,
+                borderRadius: BorderRadius.circular(18)),
+          ),
+        ],
+      ),
     );
   }
 }
